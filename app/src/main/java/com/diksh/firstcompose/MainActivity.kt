@@ -5,7 +5,12 @@ import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonColors
 import androidx.compose.material3.ButtonDefaults
@@ -28,26 +33,44 @@ import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.diksh.firstcompose.ui.theme.FirstComposeTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            displayName("Reaper")
-        }   
+            previewFunction()
+        }
     }
 
-    @OptIn(ExperimentalMaterial3Api::class)
     @Preview(showBackground = true, widthDp = 300, heightDp = 500)
     @Composable
-    fun displayName(name : String = "Diksh"){
-        val state = remember {mutableStateOf("")}
-        TextField(value = state.value,
-            onValueChange ={
-                state.value = it
-            },
-            label = { Text(text = "Enter Name",
-                            color = Color.Blue)})
+    fun previewFunction(){
+        Column() {
+            ListViewItem(imgId =R.drawable.baseline_perm_identity_24 , name ="Diksh" , occupation ="Android Developer")
+            ListViewItem(imgId =R.drawable.baseline_perm_identity_24 , name ="Diksh" , occupation ="Android Developer")
+            ListViewItem(imgId =R.drawable.baseline_perm_identity_24 , name ="Diksh" , occupation ="Android Developer")
+            ListViewItem(imgId =R.drawable.baseline_perm_identity_24 , name ="Diksh" , occupation ="Android Developer")
+        }
+
+    }
+
+
+    @Composable
+    fun ListViewItem(imgId: Int, name: String, occupation: String){
+      
+        Row(Modifier.padding(8.dp)) {
+            Image(painter = painterResource(id = imgId),
+                contentDescription ="userImage",
+                Modifier.size(40.dp)
+            )
+
+            Column() {
+                Text(text = name)
+                Text(text = occupation)
+            }
+        }
     }
 }
